@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Classe responsável por controlar o fluxo do jogo
+# e interagir com o usuário
 class Game
   def initialize
     puts 'Bem-vindo ao Mastermind!'
