@@ -12,24 +12,24 @@ class Game
     }
 
     puts 'Escolha uma opção:'
-
     choice = prompt_user_for_choice('1 - Jogar | 2 - Sair: ', menu_options.keys)
     menu_options[choice].call
   end
 
   private
 
-  def choice_difficulty
+  def start_game
     difficulty_options = {
-      1 => method(:easy),
-      2 => method(:medium),
-      3 => method(:hard)
+      1 => ['Fácil', method(:easy)],
+      2 => ['Médio', method(:medium)],
+      3 => ['Difícil', method(:hard)]
     }
 
     puts 'Escolha um nível de dificuldade:'
+    difficulty_options.each { |key, (level, _)| puts "#{key} - #{level}" }
 
-    difficulty_options.each_key { |key, value| puts "#{key} - #{value}" }
-    prompt_user_for_choice('Escolha uma dificuldade: ', difficulty_options.keys)
+    choice = prompt_user_for_choice('Escolha uma dificuldade: ', difficulty_options.keys)
+    difficulty_options[choice][1].call
   end
 
   def prompt_user_for_choice(message, valid_choices)
