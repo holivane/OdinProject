@@ -6,30 +6,30 @@ class Game
   end
 
   def play_game
-    choice = choice_play
+    menu_options = {
+      1 => method(:start_game),
+      2 => method(:exit_game)
+    }
 
-    case choice
-    when 1
-      difficulty = choice_difficulty
-      start_game(difficulty)
-    when 2
-      exit_game
-    end
+    puts 'Escolha uma opção:'
+
+    choice = prompt_user_for_choice('1 - Jogar | 2 - Sair: ', menu_options.keys)
+    menu_options[choice].call
   end
 
   private
 
-  def choice_play
-    puts '1 - Jogar'
-    puts '2 - Sair'
-    prompt_user_for_choice('Escolha uma opção: ', [1, 2])
-  end
-
   def choice_difficulty
-    puts '1 - Fácil'
-    puts '2 - Médio'
-    puts '3 - Difícil'
-    prompt_user_for_choice('Escolha uma dificuldade: ', [1, 2, 3])
+    difficulty_options = {
+      1 => method(:easy),
+      2 => method(:medium),
+      3 => method(:hard)
+    }
+
+    puts 'Escolha um nível de dificuldade:'
+
+    difficulty_options.each_key { |key, value| puts "#{key} - #{value}" }
+    prompt_user_for_choice('Escolha uma dificuldade: ', difficulty_options.keys)
   end
 
   def prompt_user_for_choice(message, valid_choices)
@@ -52,5 +52,17 @@ class Game
 
   def exit_game
     puts 'Até mais!'
+  end
+
+  def easy
+    puts 'Fácil'
+  end
+
+  def medium
+    puts 'Médio'
+  end
+
+  def hard
+    puts 'Difícil'
   end
 end
