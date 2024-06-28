@@ -38,13 +38,15 @@ class Game
     until valid_choices.include?(choice)
       print message
       choice = gets.chomp.to_i
-      puts 'Opção inválida! Tente novamente.' unless valid_choices.include?(choice)
+      puts 'Opção inválida! Tente novamente :D ' unless valid_choices.include?(choice)
     end
 
     choice
   end
 
-  def start_game(difficulty)
+  def start_game
+    difficulty = choice_difficulty
+
     easy if difficulty == 1
     medium if difficulty == 2
     hard if difficulty == 3
