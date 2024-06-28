@@ -13,7 +13,7 @@ class Game
       difficulty = choice_difficulty
       start_game(difficulty)
     when 2
-      puts 'Até mais!'
+      exit_game
     end
   end
 
@@ -48,5 +48,9 @@ class Game
     easy if difficulty == 1
     medium if difficulty == 2
     hard if difficulty == 3
+  end
+
+  def exit_game
+    puts 'Até mais!'
   end
 end
