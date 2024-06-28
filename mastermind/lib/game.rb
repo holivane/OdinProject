@@ -44,14 +44,6 @@ class Game
     choice
   end
 
-  def start_game
-    difficulty = choice_difficulty
-
-    easy if difficulty == 1
-    medium if difficulty == 2
-    hard if difficulty == 3
-  end
-
   def exit_game
     puts 'Até mais!'
   end
