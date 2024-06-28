@@ -34,18 +34,6 @@ class Game
     difficulty_options[choice][1].call
   end
 
-  def prompt_user_for_choice(message, valid_choices)
-    choice = nil
-
-    until valid_choices.include?(choice)
-      print message
-      choice = gets.chomp.to_i
-      puts 'Opção inválida! Tente novamente :D ' unless valid_choices.include?(choice)
-    end
-
-    choice
-  end
-
   def exit_game
     puts 'Até mais!'
   end
