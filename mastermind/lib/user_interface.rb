@@ -7,7 +7,7 @@ class UserInterface
     gets.chomp
   end
 
-  def self.prompt_user_for_choice(message, valid_choices)
+  def prompt_user_for_choice(message, valid_choices)
     choice = nil
 
     until valid_choices.include?(choice)
@@ -19,7 +19,7 @@ class UserInterface
     choice
   end
 
-  def self.clear_screen
+  def clear_screen
     system('clear') || system('cls')
   end
 

@@ -18,7 +18,7 @@ class Game
     }
 
     puts "#{@user.name}, escolha uma opção:"
-    choice = UserInterface.prompt_user_for_choice('1 - Jogar | 2 - Sair: ', menu_options.keys)
+    choice = @ui.prompt_user_for_choice('1 - Jogar | 2 - Sair: ', menu_options.keys)
     menu_options[choice].call
   end
 
@@ -29,13 +29,13 @@ class Game
       1 => ['Fácil', method(:easy)],
       2 => ['Médio', method(:medium)],
       3 => ['Difícil', method(:hard)],
-      4 => ['<-- Voltar', method(:play_game)]
+      4 => ['Sair -->', method(:exit_game)]
     }
 
     puts 'Escolha um nível de dificuldade:'
     difficulty_options.each { |key, (level, _)| puts "#{key} - #{level}" }
 
-    choice = UserInterface.prompt_user_for_choice('Escolha uma dificuldade: ', difficulty_options.keys)
+    choice = @ui.prompt_user_for_choice('Escolha uma dificuldade: ', difficulty_options.keys)
     difficulty_options[choice][1].call
   end
 
