@@ -7,11 +7,15 @@ class UserInterface
     gets.chomp
   end
 
-  def prompt_user_for_choice(message, valid_choices)
+  def dispaly_menu(message, menu_options)
+    puts message
+    menu_options.each { |key, value| puts "#{key} - #{value[:description]}" }
+  end
+
+  def prompt_user_for_choice(valid_choices)
     choice = nil
 
     until valid_choices.include?(choice)
-      print message
       choice = gets.chomp.to_i
       puts 'Opção inválida! Tente novamente :D ' unless valid_choices.include?(choice)
     end
@@ -23,8 +27,8 @@ class UserInterface
     system('clear') || system('cls')
   end
 
-  def display_welcome_message
-    puts 'Bem-vindo ao Mastermind!'
+  def display_welcome_message(name)
+    puts "Bem-vindo ao Mastermind, #{name}!"
   end
 
   def display_goodbye_message
@@ -32,6 +36,7 @@ class UserInterface
   end
 
   def dispaly_exit_message(name)
+    clear_screen
     puts "Até mais, #{name}!"
   end
 
@@ -44,5 +49,10 @@ class UserInterface
     puts '- Quantas cores estão corretas e em suas posições corretas (corretas)'
     puts '- Quantas cores estão corretas, mas em posições erradas (quase corretas).'
     puts 'Boa sorte!'
+    puts
+  end
+
+  def level_message(level)
+    puts "Você escolheu o nível #{level}! Boa sorte!"
   end
 end
