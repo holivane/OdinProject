@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+
 require_relative 'user'
 require_relative 'user_interface'
+require_relative 'computer'
 
 # Classe responsável por controlar o fluxo do jogo
 # e interagir com o usuário
