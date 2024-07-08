@@ -6,5 +6,7 @@ class User
 
   def initialize(name)
     @name = name
+    @difficulty = nil
+    @score = 100
   end
 end
