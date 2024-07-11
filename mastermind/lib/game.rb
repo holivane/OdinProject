@@ -12,8 +12,8 @@ class Game
   end
 
   def play_game
+    UserInterface.clear_screen
     UserInterface.display_welcome_message(@user.name)
-    UserInterface.display_instructions
     main_menu
   end
 
@@ -48,22 +48,36 @@ class Game
 
   def start_game(choice)
     UserInterface.level_message(choice)
-    max_attempts = { 1 => 12, 2 => 10, 3 => 8 }
-    code_length = { 1 => 4, 2 => 6, 3 => 8 }
+    max_attempts = { 1 => 3, 2 => 3, 3 => 3 } #{ 1 => 12, 2 => 10, 3 => 8 }
+    code_length = { 1 => 2, 2 => 2, 3 => 2 } #{ 1 => 4, 2 => 6, 3 => 8 }
+    UserInterface.game_message(max_attempts[choice], code_length[choice])
 
     @computer = Computer.new(code_length[choice])
-
-
-
+    game_loop(max_attempts[choice], code_length[choice])
   end
 
   def exit_game
     UserInterface.dispaly_exit_message(@user.name)
   end
 
-  def game_loop(max_attempts)
+  def game_loop(max_attempts, code_length)
     max_attempts.times do |attempt|
-      puts "Tentativa #{attempt + 1}"
+      UserInterface.attempt_message(attempt + 1, max_attempts)
+      UserInterface.display_choice_sequence_message(code_length)
+      attempt_sequence = choice_sequence
+      puts attempt_sequence
+      puts @computer.code
+      result = @computer.compare_sequences(attempt_sequence)
+      UserInterface.display_feedback_message(result[:correct], result[:almost_correct])
     end
+    display_game_over_message
+  end
+
+  def choice_sequence
+    gets.chomp.split
+  end
+
+  def display_game_over_message
+    UserInterface.display_goodbye_message
   end
 end
