@@ -25,14 +25,14 @@ class Game
       2 => { description: 'Sair', action: method(:exit_game) }
     }
 
-    @ui.dispaly_menu('Escolha uma opção', menu_options)
-    choice = @ui.prompt_user_for_choice(menu_options.keys)
+    UserInterface.dispaly_menu('Escolha uma opção', menu_options)
+    choice = UserInterface.prompt_user_for_choice(menu_options.keys)
 
     menu_options[choice][:action].call
   end
 
   def choice_difficulty
-    @ui.clear_screen
+    UserInterface.clear_screen
 
     menu_options = {
       1 => { description: 'Fácil' },
@@ -40,41 +40,25 @@ class Game
       3 => { description: 'Difícil' }
     }
 
-    @ui.dispaly_menu('Escolha um nível de dificuldade', menu_options)
-    choice = @ui.prompt_user_for_choice(menu_options.keys)
+    UserInterface.dispaly_menu('Escolha um nível de dificuldade', menu_options)
+    choice = UserInterface.prompt_user_for_choice(menu_options.keys)
 
     start_game(choice)
   end
 
   def start_game(choice)
-    case choice
-    when 1
-      easy
-    when 2
-      medium
-    when 3
-      hard
-    end
+    UserInterface.level_message(choice)
+    max_attempts = { 1 => 12, 2 => 10, 3 => 8 }
+    code_length = { 1 => 4, 2 => 6, 3 => 8 }
+
+    @computer = Computer.new(code_length[choice])
+
+
+
   end
 
   def exit_game
-    @ui.dispaly_exit_message(@user.name)
-  end
-
-  def easy
-    @ui.clear_screen
-    @ui.level_message('Fácil')
-    game_loop(8)
-  end
-
-  def medium
-    @ui.clear_screen
-    @ui.level_message('Médio')
-  end
-
-  def hard
-    @ui.clear_screen
-    @ui.level_message('Difícil')
+    UserInterface.dispaly_exit_message(@user.name)
   end
 
   def game_loop(max_attempts)
