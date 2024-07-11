@@ -8,14 +8,12 @@ require_relative 'computer'
 # e interagir com o usuário
 class Game
   def initialize
-    @ui = UserInterface.new
-    @user = User.new(@ui.prompt_user_for_name)
-    @computer = Computer.new
+    @user = User.new(UserInterface.prompt_user_for_name)
   end
 
   def play_game
-    @ui.display_welcome_message(@user.name)
-    @ui.display_instructions
+    UserInterface.display_welcome_message(@user.name)
+    UserInterface.display_instructions
     main_menu
   end
 

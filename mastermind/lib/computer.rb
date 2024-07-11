@@ -2,14 +2,13 @@
 
 # Classe que representa o computador
 class Computer
-  def initialize
-    @code = []
-    4.times { @code << rand(1..6) }
+  attr_reader :code_length
+
+  def initialize(code_length)
+    @code = generate_code(code_length)
   end
 
-  def guess
-    guess = []
-    4.times { guess << rand(1..6) }
-    guess
+  def generate_code(length)
+    Array.new(length) { UserInterface::COLORS.sample }
   end
 end
